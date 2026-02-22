@@ -1,18 +1,20 @@
-function analyze() {
+async function analyze() {
   const text = document.getElementById("inputText").value;
 
-  if (!text) {
-    alert("Paste something first");
-    return;
-  }
+  const response = await fetch("/analyze", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ text })
+  });
 
-  const words = text.trim().split(/\s+/).length;
-  const sentences = text.split(/[.!?]/).length - 1;
+  const data = await response.json();
 
   document.getElementById("result").innerHTML = `
-    <h3>Basic Insight</h3>
-    <p><b>Word Count:</b> ${words}</p>
-    <p><b>Sentences:</b> ${sentences}</p>
-    <p>This confirms the frontend is fully working.</p>
-  `;
+  <h3>Insight</h3>
+  <p><strong>Word Count:</strong> ${data.words}</p>
+  <p><strong>Sentences:</strong> ${data.sentences}</p>
+  <p>${data.message}</p>
+`;
 }
