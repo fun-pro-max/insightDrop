@@ -5,11 +5,16 @@
   <title>InsightDrop</title>
   <link rel="stylesheet" href="style.css">
 </head>
-<body>
 
+<body>
 <div class="container">
   <h1>InsightDrop</h1>
+
   <textarea id="inputText" placeholder="Paste text here..."></textarea>
+
+  <p>OR upload a .txt file</p>
+  <input type="file" id="fileInput" />
+
   <button onclick="analyze()">Analyze</button>
 
   <div id="result"></div>
